@@ -1,13 +1,10 @@
-import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import InfoDashboard from "@/components/InfoDashboard";
+import { SafeAreaView, Text, View } from "react-native";
 
-export default function Index() {
-  let username = "John Doe";
+export default function Dashboard() {
   return (
-    <View>
-      <Text>Hi, {username}</Text>
-      <Text className="">ALL YOU NEED ARE SLIGHTLY BIGGER MUSCLES</Text>
-      <Text>Summary</Text>
-    </View>
+    <SafeAreaView className="bg-white h-full">
+      <InfoDashboard username="Shadowbanks" />
+    </SafeAreaView>
   );
 }
