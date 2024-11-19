@@ -15,10 +15,15 @@ module.exports = {
         menu_primary: "#F6F6F6",
         menu_secondary: "#D9D9D9",
         primary_text: "#7C7C7C",
-        button_green: "#00FF00",
+        button_green: "#21D921",
         button_red: "#F25050",
         line_color: "#D0CECE",
         pro_color: "#221DF1",
+        borderColor: "#AFA7A7",
+        textBlack: "#212020"
+      },
+      spacing: {
+        "1/8": "12.5%",
       },
     },
   },
