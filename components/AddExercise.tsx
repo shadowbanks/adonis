@@ -11,6 +11,7 @@ import { useCallback, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, usePathname } from "expo-router";
 import ExerciseCard from "./ExerciseCard";
+import CustomButton from "./CustomButton";
 
 interface AddExerciseProps {
   initialQuery?: string;
@@ -132,7 +133,20 @@ const AddExercise = ({
             <Text className="text-primary_text text-lg">{title}</Text>
           </View>
         )}
+        ListFooterComponent={
+          <View className="h-20">
+            <Text>{}</Text>
+          </View>
+        }
         showsVerticalScrollIndicator={false}
+      />
+      <CustomButton
+        label={`Add ${selectedExercises.length} exercises`}
+        iconStyle={""}
+        buttonStyle="bg-button_green text-white rounded-md absolute"
+        handlePress={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
     </View>
   );

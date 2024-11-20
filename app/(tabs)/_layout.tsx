@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, usePathname } from "expo-router";
 import { Image, Text, View, ImageSourcePropType } from "react-native";
-import { icons } from "@/constants";
+import { useMemo } from "react";
 
 type TabIconProps = {
   icon: ImageSourcePropType;
@@ -31,6 +31,17 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 };
 
 export default function TabsLayout() {
+  const pathname = usePathname();
+  const hideTabBarRoutes = [
+    "/workout/new_workout",
+    "/workout/copy_workout",
+    "/workout/new_routine",
+  ];
+  const shouldHideTabBar = useMemo(
+    () => hideTabBarRoutes.includes(pathname),
+    [pathname]
+  );
+  // console.log(pathname);
   return (
     <Tabs
       screenOptions={{
@@ -71,6 +82,9 @@ export default function TabsLayout() {
               size={24}
             />
           ),
+          tabBarStyle: shouldHideTabBar
+            ? { display: "none" }
+            : { display: "flex" },
         }}
       />
       <Tabs.Screen

@@ -18,27 +18,27 @@ export default function workout() {
         </View>
         <CustomButton
           label="New Workout"
-          button_style={style}
+          buttonStyle={style}
           iconName={"plus"}
-          icon_style="#0094FF"
+          iconStyle="#0094FF"
           handlePress={() => {
             router.push("/workout/new_workout");
           }}
         />
         <CustomButton
           label="Copy Workout"
-          button_style={style}
+          buttonStyle={style}
           iconName={"copy1"}
-          icon_style="#0094FF"
+          iconStyle="#0094FF"
           handlePress={() => {
             router.push("/workout/copy_workout");
           }}
         />
         <CustomButton
           label="New Routine"
-          button_style={style}
+          buttonStyle={style}
           iconName={"form"}
-          icon_style="#0094FF"
+          iconStyle="#0094FF"
           handlePress={() => {
             router.push("/workout/new_routine");
           }}
