@@ -1,10 +1,12 @@
 import CustomButton from "@/components/CustomButton";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView, Text, View } from "react-native";
 import { router } from "expo-router";
+import { useExerciseContext } from "@/context/ExerciseContext";
 
 export default function workout() {
-  const style = "border-borderColor w-72 h-10 my-5";
+  const { setSelectedExercises } = useExerciseContext();
+  const style = "border-borderColor border w-72 h-10 my-5";
   return (
     <SafeAreaView className="bg-white h-full">
       <View>
@@ -22,8 +24,9 @@ export default function workout() {
           iconName={"plus"}
           iconStyle="#0094FF"
           handlePress={() => {
-            router.push("/workout/new_workout");
+            router.push("/workout/newWorkout");
           }}
+          textColor="black"
         />
         <CustomButton
           label="Copy Workout"
@@ -33,6 +36,7 @@ export default function workout() {
           handlePress={() => {
             router.push("/workout/copy_workout");
           }}
+          textColor="black"
         />
         <CustomButton
           label="New Routine"
@@ -42,6 +46,7 @@ export default function workout() {
           handlePress={() => {
             router.push("/workout/new_routine");
           }}
+          textColor="black"
         />
       </View>
     </SafeAreaView>

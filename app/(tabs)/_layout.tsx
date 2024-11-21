@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname } from "expo-router";
 import { Image, Text, View, ImageSourcePropType } from "react-native";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
+import { useExerciseContext } from "@/context/ExerciseContext";
 
 type TabIconProps = {
   icon: ImageSourcePropType;
@@ -32,16 +33,13 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 
 export default function TabsLayout() {
   const pathname = usePathname();
-  const hideTabBarRoutes = [
-    "/workout/new_workout",
-    "/workout/copy_workout",
-    "/workout/new_routine",
-  ];
-  const shouldHideTabBar = useMemo(
-    () => hideTabBarRoutes.includes(pathname),
-    [pathname]
-  );
-  // console.log(pathname);
+  const { setSelectedExercises } = useExerciseContext();
+
+  const shouldHideTabBar = useMemo(() => pathname !== "/workout", [pathname]);
+
+  useEffect(() => {
+    if (pathname === "/workout") setSelectedExercises([]);
+  }, [pathname]);
   return (
     <Tabs
       screenOptions={{
@@ -68,6 +66,7 @@ export default function TabsLayout() {
               size={24}
             />
           ),
+          tabBarStyle: { display: "flex" },
         }}
       />
       <Tabs.Screen
@@ -82,9 +81,7 @@ export default function TabsLayout() {
               size={24}
             />
           ),
-          tabBarStyle: shouldHideTabBar
-            ? { display: "none" }
-            : { display: "flex" },
+          tabBarStyle: shouldHideTabBar ? { display: "none" } : "",
         }}
       />
       <Tabs.Screen
@@ -99,6 +96,7 @@ export default function TabsLayout() {
               size={24}
             />
           ),
+          tabBarStyle: { display: "flex" },
         }}
       />
     </Tabs>

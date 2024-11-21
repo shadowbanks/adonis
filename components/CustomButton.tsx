@@ -9,6 +9,7 @@ interface CustomButtonProps {
   iconStyle?: string;
   buttonStyle: string;
   handlePress: () => void;
+  textColor: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -17,17 +18,18 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   iconStyle,
   buttonStyle,
   handlePress,
+  textColor,
 }) => {
   return (
     <TouchableOpacity
-      className={`border ${buttonStyle} mx-auto flex items-center justify-center `}
+      className={`${buttonStyle} mx-auto flex items-center justify-center `}
       onPress={handlePress}
       activeOpacity={0.4}
     >
       {/* <icon /> */}
       <View className="w-44  h-8 flex-row gap-6 justify-center items-center ">
         {iconName && <AntDesign name={iconName} color={iconStyle} size={20} />}
-        <Text className="text-black text-xl">{label}</Text>
+        <Text className={`text-${textColor} text-xl`}>{label}</Text>
       </View>
     </TouchableOpacity>
   );

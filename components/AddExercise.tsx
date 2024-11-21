@@ -12,17 +12,18 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, usePathname } from "expo-router";
 import ExerciseCard from "./ExerciseCard";
 import CustomButton from "./CustomButton";
+import { useExerciseContext } from "@/context/ExerciseContext";
 
 interface AddExerciseProps {
   initialQuery?: string;
   topData: Array<{
-    id: number;
+    id: string;
     name: string;
     equipment: string;
     target: string;
   }>;
   customData: Array<{
-    id: number;
+    id: string;
     name: string;
     equipment: string;
     target: string;
@@ -38,38 +39,38 @@ const AddExercise = ({
   const [query, setQuery] = useState(initialQuery || "");
   const pathname = usePathname();
 
-  const [selectedExercises, setSelectedExercises] = useState<number[]>([]);
+  const { selectedExercises, setSelectedExercises } = useExerciseContext();
 
-  const toggleSelect = useCallback((id: number) => {
+  const toggleSelect = useCallback((id: string) => {
     setSelectedExercises((prev) =>
       prev.includes(id)
         ? prev.filter((exerciseId) => exerciseId !== id)
         : [...prev, id]
     );
   }, []);
-  const isSelected = (id: number) => selectedExercises.includes(id);
-  const { width } = Dimensions.get("window");
+  const isSelected = (id: string) => selectedExercises.includes(id);
+  const { width, height } = Dimensions.get("window");
 
-  const renderItem = useCallback(
-    ({
-      item,
-    }: {
-      item: { id: number; name: string; equipment: string; target: string };
-    }) => (
-      <ExerciseCard
-        item={item}
-        toggleSelect={toggleSelect}
-        isSelected={isSelected}
-      />
-    ),
-    [toggleSelect, isSelected]
-  );
+  // const renderItem = useCallback(
+  //   ({
+  //     item,
+  //   }: {
+  //     item: { id: number; name: string; equipment: string; target: string };
+  //   }) => (
+  //     <ExerciseCard
+  //       item={item}
+  //       toggleSelect={toggleSelect}
+  //       isSelected={isSelected}
+  //     />
+  //   ),
+  //   [toggleSelect, isSelected]
+  // );
   const sections = [
     { title: "Top Exercises", data: topData },
     { title: "Custom Exercises", data: customData },
   ];
   return (
-    <View className="w-full">
+    <View className={`w-full`} style={{ minHeight: height - 100 }}>
       <View className="items-center py-5 bg-white">
         <View
           className={`border ${
@@ -118,36 +119,37 @@ const AddExercise = ({
           </View>
         </View>
       </View>
-      <SectionList
-        sections={sections}
-        keyExtractor={(item, index) => item.id.toString() + index}
-        renderItem={({ item }) => (
-          <ExerciseCard
-            item={item}
-            toggleSelect={toggleSelect}
-            isSelected={isSelected}
-          />
-        )}
-        renderSectionHeader={({ section: { title } }) => (
-          <View className="mt-5" style={{ paddingRight: width / 8 }}>
-            <Text className="text-primary_text text-lg">{title}</Text>
-          </View>
-        )}
-        ListFooterComponent={
-          <View className="h-20">
-            <Text>{}</Text>
-          </View>
-        }
-        showsVerticalScrollIndicator={false}
-      />
-      <CustomButton
-        label={`Add ${selectedExercises.length} exercises`}
-        iconStyle={""}
-        buttonStyle="bg-button_green text-white rounded-md absolute"
-        handlePress={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+      <View className="flex-1">
+        <SectionList
+          sections={sections}
+          keyExtractor={(item, index) => item.id.toString() + index}
+          renderItem={({ item }) => (
+            <ExerciseCard
+              item={item}
+              toggleSelect={toggleSelect}
+              isSelected={isSelected}
+            />
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <View className="mt-5" style={{ paddingLeft: width / 8 }}>
+              <Text className="text-primary_text text-lg">{title}</Text>
+            </View>
+          )}
+          showsVerticalScrollIndicator={false}
+          stickySectionHeadersEnabled={false}
+        />
+      </View>
+      {selectedExercises.length > 0 && (
+        <CustomButton
+          label={`Add ${selectedExercises.length} exercises`}
+          iconStyle={""}
+          buttonStyle="bg-button_green text-white w-80 h-11 rounded-md"
+          handlePress={() => {
+            router.push("/workout/newWorkout/log_workout");
+          }}
+          textColor="white"
+        />
+      )}
     </View>
   );
 };
