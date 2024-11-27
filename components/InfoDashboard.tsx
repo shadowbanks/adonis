@@ -8,7 +8,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 type InfoDashboardProps = {
   username: string;
 
-  // other props
 };
 
 const InfoDashboard: React.FC<InfoDashboardProps> = ({ username }) => {

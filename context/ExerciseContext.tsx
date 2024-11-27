@@ -10,6 +10,10 @@ interface Exercise {
 interface ExerciseContextType {
   selectedExercises: string[];
   setSelectedExercises: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedExercisesForRoutine: string[];
+  setSelectedExercisesForRoutine: React.Dispatch<
+    React.SetStateAction<string[]>
+  >;
   exercises: Array<Exercise>;
   customExercises: Array<Exercise>;
 }
@@ -34,6 +38,8 @@ type ExerciseProviderProps = {
 
 export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
   const [selectedExercises, setSelectedExercises] = useState<string[]>([]);
+  const [selectedExercisesForRoutine, setSelectedExercisesForRoutine] =
+    useState<string[]>([]);
 
   const exercises = useMemo<Exercise[]>(
     () => [
@@ -234,6 +240,8 @@ export const ExerciseProvider = ({ children }: ExerciseProviderProps) => {
         setSelectedExercises,
         exercises,
         customExercises,
+        selectedExercisesForRoutine,
+        setSelectedExercisesForRoutine,
       }}
     >
       {children}

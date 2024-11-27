@@ -20,7 +20,8 @@ module.exports = {
         line_color: "#D0CECE",
         pro_color: "#221DF1",
         borderColor: "#AFA7A7",
-        textBlack: "#212020"
+        textBlack: "#212020",
+        blue: "#0088FF",
       },
       spacing: {
         "1/8": "12.5%",

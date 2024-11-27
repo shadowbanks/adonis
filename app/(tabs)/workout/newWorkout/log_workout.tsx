@@ -50,6 +50,7 @@ const LogWorkout = () => {
                   />
                 </View>
               }
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </View>

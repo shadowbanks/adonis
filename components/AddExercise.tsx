@@ -28,13 +28,17 @@ interface AddExerciseProps {
     equipment: string;
     target: string;
   }>;
+  redirect?: any;
+  // replace?: boolean;
 }
 
 const AddExercise = ({
   initialQuery,
   topData,
   customData,
-}: AddExerciseProps) => {
+  redirect,
+}: // replace = false,
+AddExerciseProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState(initialQuery || "");
   const pathname = usePathname();
@@ -81,6 +85,7 @@ const AddExercise = ({
             className="mt-0.5 text-base text-white"
             value={query}
             placeholder="Search for an exercise"
+            placeholderTextColor="#7C7C7C"
             onChangeText={(e) => setQuery(e)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -145,7 +150,7 @@ const AddExercise = ({
           iconStyle={""}
           buttonStyle="bg-button_green text-white w-80 h-11 rounded-md"
           handlePress={() => {
-            router.push("/workout/newWorkout/log_workout");
+            redirect ? router.push(redirect) : router.back();
           }}
           textColor="white"
         />

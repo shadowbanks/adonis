@@ -5,26 +5,22 @@ import TopBar from "@/components/TopBar";
 import AddExercise from "@/components/AddExercise";
 import { useExerciseContext } from "@/context/ExerciseContext";
 
-const new_workout = () => {
+const AddRoutineExercise = () => {
   const { exercises, customExercises } = useExerciseContext();
   return (
     <GestureHandlerRootView>
       <SafeAreaView className=" bg-white">
         <TopBar
-          label="New Workout"
+          label="Add Exercise"
           rightIcon={true}
           leftIcon={true}
           IconRight={"plus"}
           rightIconColor="#0094FF"
         />
-        <AddExercise
-          topData={exercises}
-          customData={customExercises}
-          redirect="/workout/newWorkout/log_workout"
-        />
+        <AddExercise topData={exercises} customData={customExercises} />
       </SafeAreaView>
     </GestureHandlerRootView>
   );
 };
 
-export default new_workout;
+export default AddRoutineExercise;

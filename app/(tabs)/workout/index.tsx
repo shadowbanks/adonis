@@ -44,7 +44,7 @@ export default function workout() {
           iconName={"form"}
           iconStyle="#0094FF"
           handlePress={() => {
-            router.push("/workout/new_routine");
+            router.push("/workout/newRoutine");
           }}
           textColor="black"
         />

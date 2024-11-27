@@ -10,11 +10,13 @@ const SetInput = ({ index }: { index: string }) => {
       <TextInput
         className="text-xl w-16 text-center"
         placeholder="0"
+        placeholderTextColor="#7C7C7C"
         keyboardType="numeric"
       />
       <TextInput
         className="text-xl w-16 text-center"
         placeholder="0"
+        placeholderTextColor="#7C7C7C"
         keyboardType="numeric"
       />
     </View>

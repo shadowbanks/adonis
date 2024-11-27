@@ -1,42 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname } from "expo-router";
-import { Image, Text, View, ImageSourcePropType } from "react-native";
-import { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useExerciseContext } from "@/context/ExerciseContext";
-
-type TabIconProps = {
-  icon: ImageSourcePropType;
-  color: string;
-  name: string;
-  focused: boolean;
-};
-
-const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
-  console.log(icon);
-  return (
-    <View className="items-center justify-center gap-2">
-      <Image
-        source={icon}
-        resizeMode="contain"
-        tintColor={color}
-        className="w-6 h-6"
-      />
-      <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-        style={{ color: color }}
-      >
-        {name}
-      </Text>
-    </View>
-  );
-};
 
 export default function TabsLayout() {
   const pathname = usePathname();
   const { setSelectedExercises } = useExerciseContext();
 
-  const shouldHideTabBar = useMemo(() => pathname !== "/workout", [pathname]);
-
+  const shouldShowTabBar = useMemo(() => pathname === "/workout", [pathname]);
+  console.log(pathname);
   useEffect(() => {
     if (pathname === "/workout") setSelectedExercises([]);
   }, [pathname]);
@@ -81,7 +53,9 @@ export default function TabsLayout() {
               size={24}
             />
           ),
-          tabBarStyle: shouldHideTabBar ? { display: "none" } : "",
+          tabBarStyle: shouldShowTabBar
+            ? { display: "flex" }
+            : { display: "none" },
         }}
       />
       <Tabs.Screen
